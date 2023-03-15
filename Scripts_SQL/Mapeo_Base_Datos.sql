@@ -84,6 +84,22 @@ CREATE TABLE control_empleado.cargo_empleado(
     FOREIGN KEY (cui_empleado) REFERENCES control_empleado.empleado(cui) ON UPDATE CASCADE
 );
 
+CREATE TABLE control_empleado.empleado_sucursal(
+    codigo_id SERIAL PRIMARY KEY,
+    codigo_sucursal INTEGER NOT NULL,
+    cui_empleado VARCHAR(13) NOT NULL,
+    FOREIGN KEY (cui_empleado) REFERENCES control_empleado.empleado(cui) ON UPDATE CASCADE,
+    FOREIGN KEY (codigo_sucursal) REFERENCES control_sucursal_bodega.sucursal(codigo_id)
+);
+
+CREATE TABLE control_empleado.empleado_bodega(
+    codigo_id SERIAL PRIMARY KEY,
+    codigo_bodega INTEGER NOT NULL,
+    cui_empleado VARCHAR(13) NOT NULL,
+    FOREIGN KEY (codigo_bodega) REFERENCES control_sucursal_bodega.bodega(codigo_id),
+    FOREIGN KEY (cui_empleado) REFERENCES control_empleado.empleado(cui) ON UPDATE CASCADE
+);
+
 
 --tablas del eschema control de productos
 CREATE TABLE control_producto.producto(
@@ -92,6 +108,9 @@ CREATE TABLE control_producto.producto(
     nombre VARCHAR(50) NOT NULL,
     descripcion VARCHAR(150) NOT NULL
 );
+
+ALTER TABLE control_producto.producto DROP COLUMN precio;
+
 
 CREATE TABLE control_producto.marca(
     codigo_id SERIAL PRIMARY KEY,
@@ -104,30 +123,30 @@ CREATE TABLE control_producto.producto_marca(
     codigo_marca INTEGER NOT NULL,
     codigo_producto VARCHAR(15) NOT NULL,
     FOREIGN KEY (codigo_marca) REFERENCES control_producto.marca(codigo_id),
-    FOREIGN KEY (codigo_producto) REFERENCES control_producto.producto(codigo)
+    FOREIGN KEY (codigo_producto) REFERENCES control_producto.producto(codigo) ON UPDATE CASCADE
 );
+ALTER TABLE control_producto.producto_marca ADD COLUMN precio DECIMAL(10,2) NOT NULL;
 
 
 --tablas del schema control de almacenamiento de productos en bodegas y sucursales
 CREATE TABLE control_almacenamiento.bodega_almacenamiento_producto(
     codigo_id SERIAL PRIMARY KEY,
-    codigo_producto VARCHAR(15) NOT NULL,
+    codigo_producto INTEGER NOT NULL,
     codigo_bodega INTEGER NOT NULL,
     cantidad_existente INTEGER NOT NULL,
     fecha_adquisicion TIMESTAMP DEFAULT now(),
     FOREIGN KEY (codigo_bodega) REFERENCES control_sucursal_bodega.bodega(codigo_id),
-    FOREIGN KEY (codigo_producto) REFERENCES control_producto.producto(codigo)
+    FOREIGN KEY (codigo_producto) REFERENCES control_producto.producto_marca(codigo_id)
 );
 
 CREATE TABLE control_almacenamiento.sucursal_almacenamiento_producto(
     codigo_id SERIAL PRIMARY KEY,
-    codigo_producto VARCHAR(15) NOT NULL,
+    codigo_producto INTEGER NOT NULL,
     codigo_sucursal INTEGER NOT NULL,
     cantidad_existente INTEGER NOT NULL,
     fecha_adquisicion TIMESTAMP DEFAULT now(),
     FOREIGN KEY (codigo_sucursal) REFERENCES control_sucursal_bodega.sucursal(codigo_id),
-    FOREIGN KEY (codigo_producto) REFERENCES control_producto.producto(codigo)
-    
+    FOREIGN KEY (codigo_producto) REFERENCES control_producto.producto_marca(codigo_id)  
 );
 
 
@@ -147,16 +166,19 @@ CREATE TABLE control_venta.venta_producto(
     cui_empleado VARCHAR(13) NOT NULL,
     nit_cliente VARCHAR(13) NOT NULL,
     codigo_sucursal INTEGER NOT NULL, 
-    FOREIGN KEY (nit_cliente) REFERENCES control_venta.cliente(nit),
+    FOREIGN KEY (nit_cliente) REFERENCES control_venta.cliente(nit) ON UPDATE CASCADE,
     FOREIGN KEY (codigo_sucursal) REFERENCES control_sucursal_bodega.sucursal(codigo_id),
-    FOREIGN KEY (cui_empleado) REFERENCES control_empleado.empleado(cui)
+    FOREIGN KEY (cui_empleado) REFERENCES control_empleado.empleado(cui) ON UPDATE CASCADE
 );
+ALTER TABLE control_venta.venta_producto ALTER COLUMN codigo TYPE varchar(50);
 
 CREATE TABLE control_venta.items_venta_producto(
     codigo_id SERIAL NOT NULL PRIMARY KEY,
     cantidad_producto INTEGER NOT NULL,
-    codigo_producto VARCHAR(15) NOT NULL,
+    codigo_producto INTEGER NOT NULL,
     codigo_venta_producto VARCHAR(15) NOT NULL,
     FOREIGN KEY (codigo_venta_producto) REFERENCES control_venta.venta_producto(codigo),
-    FOREIGN KEY (codigo_producto) REFERENCES control_producto.producto(codigo)
+    FOREIGN KEY (codigo_producto) REFERENCES control_producto.producto_marca(codigo_id)
 );
+
+ALTER TABLE control_venta.items_venta_producto ALTER COLUMN codigo_venta_producto  TYPE varchar(50);
