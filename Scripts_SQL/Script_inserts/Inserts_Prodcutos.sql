@@ -69,6 +69,7 @@ INSERT INTO control_producto.producto_marca(codigo_marca, codigo_producto, preci
 
 
 --update para ingresar el precio de cada producto_marca inicialmente estaban en producto
+/*
 UPDATE control_producto.producto_marca SET precio = 1200.93 WHERE codigo_id=1;
 UPDATE control_producto.producto_marca SET precio = 1499.99 WHERE codigo_id=2;
 UPDATE control_producto.producto_marca SET precio = 939.65 WHERE codigo_id=3;
@@ -105,3 +106,4 @@ UPDATE control_producto.producto_marca SET precio = 498.26 WHERE codigo_id=33;
 UPDATE control_producto.producto_marca SET precio = 940.15 WHERE codigo_id=34;
 UPDATE control_producto.producto_marca SET precio = 3100.25 WHERE codigo_id=35;
 UPDATE control_producto.producto_marca SET precio = 1450.25 WHERE codigo_id=36;
+*/
