@@ -12,7 +12,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "empleado", schema = "control_empleado")
+@Table(name = "empleado_sucur", schema = "control_empleado")
 public class User {
     @Id
     @Column

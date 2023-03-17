@@ -12,8 +12,9 @@ export class LoginUsersService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getEmpleados():Observable<Usuario[]>{
-    return this.httpClient.get<Usuario[]>(this.API_URL+'empleados');
+  public getEmpleados(emplealdo:Usuario):Observable<Usuario>{
+    console.log(emplealdo)
+    return this.httpClient.get<Usuario>(this.API_URL+'empleadoSecion?cui='+emplealdo.cui+'&password='+emplealdo.passworde);
   }
 
   public crearUsuario(usuarioN: Usuario): Observable<Usuario> {

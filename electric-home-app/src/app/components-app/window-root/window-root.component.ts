@@ -11,31 +11,39 @@ export class WindowRootComponent implements OnInit {
   
   loginForm!: FormGroup;
   usuarios!: Usuario[];
+  usuario!:Usuario;
   constructor(private formBuilder: FormBuilder, private serviceLogin: LoginUsersService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      usuario: [null, Validators.required],
-      password: [null, Validators.required],
+      cui: [null, Validators.required],
+      passworde: [null, Validators.required],
     });
   }
 
   public login(){
-   this.serviceLogin.getEmpleados().subscribe(
-    (created: Usuario[]) => {
+   this.serviceLogin.getEmpleados(this.loginForm.value).subscribe(
+    (created: Usuario) => {
       this.loginForm.reset({
-        usuario: null,
-        password: null,
+        cui: null,
+        passworde: null,
       });
-      this.usuarios=created
-      console.log(this.usuarios)
+      this.usuario=created
+      this.digeAreaTrabajo(this.usuario);
     },
     (erro: any) => {
       //pag errro
       console.log('peticion xd')
     }
    );
-    
+  }
+
+  public digeAreaTrabajo(usuario:Usuario){
+    if (usuario != null && usuario != undefined) {
+      console.log(usuario)
+    }else{
+      console.log("usuario o passwor invalido gay")
+    }
   }
 
 }
