@@ -7,6 +7,7 @@ import { Usuario } from 'src/class-models/usuario';
 import { WindowRootComponent } from '../../window-root/window-root.component';
 import { Cliente } from 'src/class-models/cliente';
 import Swal from 'sweetalert2';
+import { Producto } from 'src/class-models/producto';
 
 @Component({
   selector: 'app-navbar-ventas',
@@ -48,6 +49,27 @@ export class NavbarVentasComponent implements OnInit {
             'question'
           );
           this.route.navigate(['Area-Ventas/clientes'])
+        }
+      },
+      (erro:any)=> {
+
+      }
+    );
+  }
+
+  public dirigirProductos(){
+    this.serviceVenta.getProductos(this.sesion.sucursalContratado.codigoId).subscribe(
+      (created:Producto[])=> {
+        if (created !== null && created !== undefined ) {
+          this.sesion.porductos = created
+          this.route.navigate(['Area-Ventas/productos'])
+        }else{
+          Swal.fire(
+            'ALGO SALIO MAL',
+            'El servidor no pudo responde al obtener el listado de Productos',
+            'question'
+          );
+          this.route.navigate(['Area-Ventas/productos'])
         }
       },
       (erro:any)=> {

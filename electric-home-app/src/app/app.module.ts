@@ -10,6 +10,7 @@ import { NavbarVentasComponent } from './components-app/Windows-Ventas/navbar-ve
 import { FooterComponent } from './components-app/window-root/footer/footer.component';
 import { WindowVentaComponent } from './components-app/Windows-Ventas/window-venta/window-venta.component';
 import { WindowClientesComponent } from './components-app/Windows-Ventas/window-clientes/window-clientes.component';
+import { WindowProductosComponent } from './components-app/Windows-Ventas/window-productos/window-productos.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { WindowClientesComponent } from './components-app/Windows-Ventas/window-
     NavbarVentasComponent,
     FooterComponent,
     WindowVentaComponent,
-    WindowClientesComponent
+    WindowClientesComponent,
+    WindowProductosComponent
   ],
   imports: [
     BrowserModule,

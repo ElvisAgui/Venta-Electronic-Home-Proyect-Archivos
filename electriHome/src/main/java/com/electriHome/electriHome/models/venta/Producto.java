@@ -25,6 +25,7 @@ public class Producto {
     private  BigDecimal precio;
     private String marca;
     private Integer cantidad;
+    private String codigoProducto;
 
     public Integer getCodigoId() {
         return codigoId;
@@ -65,7 +66,14 @@ public class Producto {
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
-    
+
+    public String getCodigoProducto() {
+        return codigoProducto;
+    }
+
+    public void setCodigoProducto(String codigoProducto) {
+        this.codigoProducto = codigoProducto;
+    }
     
 
     @Override

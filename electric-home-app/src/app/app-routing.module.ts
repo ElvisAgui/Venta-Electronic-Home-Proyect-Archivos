@@ -1,3 +1,4 @@
+import { WindowProductosComponent } from './components-app/Windows-Ventas/window-productos/window-productos.component';
 import { WindowClientesComponent } from './components-app/Windows-Ventas/window-clientes/window-clientes.component';
 import { WindowVentaComponent } from './components-app/Windows-Ventas/window-venta/window-venta.component';
 import { WindowHomeVentaComponent } from './components-app/Windows-Ventas/window-home-venta/window-home-venta.component';
@@ -29,6 +30,11 @@ const routes: Routes = [
   {
     path:'Area-Ventas/clientes',
     component: WindowClientesComponent,
+    canActivate: [AutenticacionService],
+  },
+  {
+    path:'Area-Ventas/productos',
+    component: WindowProductosComponent,
     canActivate: [AutenticacionService],
   },
   {

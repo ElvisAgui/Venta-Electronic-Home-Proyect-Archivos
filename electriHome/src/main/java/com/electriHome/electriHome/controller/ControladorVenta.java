@@ -63,7 +63,7 @@ public class ControladorVenta {
             return null;
         }
     }
-        
+
     @GetMapping(path = "/getClientes")
     public List<Cliente> getClientes() {
         try {
@@ -83,8 +83,7 @@ public class ControladorVenta {
             return null;
         }
     }
-    
-    
+
     @PutMapping(path = "/setCliente")
     public Cliente setCliente(@RequestBody Cliente cliente) {
         try {
@@ -156,8 +155,33 @@ public class ControladorVenta {
                 producTem.setPrecio((BigDecimal) result.get(0)[2]);
                 producTem.setMarca((String) result.get(0)[3]);
                 producTem.setCantidad((Integer) result.get(0)[4]);
-                System.out.println(producTem.toString());
                 return producTem;
+            }
+            return null;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+    }
+
+    @GetMapping(path = "/getProductos")
+    public List<Producto> getListProductosSucursal(@RequestParam Integer sucursal) {
+        try {
+            List<Object[]> result = this.productoRpo.getListProductosSucursal(sucursal);
+            if (!result.isEmpty()) {
+                List<Producto> productos = new ArrayList<>();
+                for (Object[] obj : result) {
+                    Producto tmp = new Producto();
+                    tmp.setCodigoId((Integer) obj[0]);
+                    tmp.setNombre((String) obj[1]);
+                    tmp.setPrecio((BigDecimal) obj[2]);
+                    tmp.setMarca((String) obj[3]);
+                    tmp.setCantidad((Integer) obj[4]);
+                    tmp.setCodigoProducto((String) obj[5]);
+                    productos.add(tmp);
+                }
+                return productos;
             }
             return null;
         } catch (Exception e) {

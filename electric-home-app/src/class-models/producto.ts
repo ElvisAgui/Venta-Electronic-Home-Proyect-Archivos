@@ -4,4 +4,5 @@ export class Producto {
   precio!: number;
   marca!: String;
   cantidad!:number
+  codigoProducto!:String
 }

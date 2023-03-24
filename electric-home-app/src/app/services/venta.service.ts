@@ -38,6 +38,11 @@ export class VentaService {
     return this.httpClient.get<Producto>(this.API_URL+'getProducto?sucursal='+codigoSucu+'&producto='+codigoPro);
   }
 
+  public getProductos(codigoSucu:number): Observable<Producto[]>{
+    return this.httpClient.get<Producto[]>(this.API_URL+'getProductos?sucursal='+codigoSucu);
+  }
+
+
   public getDescuento(nit:String): Observable<VentaProducto>{
     return this.httpClient.get<VentaProducto>(this.API_URL+'getDescuento?nit='+nit);
   }

@@ -1,0 +1,30 @@
+<app-navbar-ventas></app-navbar-ventas>
+<section class="h-100 h-custom" style="background-color: #394642">
+  <div class="container py-5 h-100">
+      <div class="card">
+        <table class="table table-info table-striped">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">codigo Producto</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Cantidad Existente</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let producto of productos let i= index">
+                <td>{{i+1}}</td>
+                <th scope="row">{{producto.codigoProducto}}</th>
+                <td>{{producto.nombre}}</td>
+                <td>{{producto.marca}}</td>
+                <td>Q {{producto.precio}}</td>
+                <td class="text-center">{{producto.cantidad}}</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+  </div>
+</section>
+<app-footer></app-footer>
