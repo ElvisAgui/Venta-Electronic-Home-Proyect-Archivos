@@ -82,29 +82,30 @@ public class Empleado {
         this.salario = salario;
     }
 
-    public java.lang.Short getTipo_cargo() {
+    public Short getTipoCargo() {
         return tipoCargo;
     }
 
-    public void setTipo_cargo(java.lang.Short tipo_cargo) {
-        this.tipoCargo = tipo_cargo;
+    public void setTipoCargo(Short tipoCargo) {
+        this.tipoCargo = tipoCargo;
     }
 
-    public String getNombre_cargo() {
+    public String getNombreCargo() {
         return nombreCargo;
     }
 
-    public void setNombre_cargo(String nombre_cargo) {
-        this.nombreCargo = nombre_cargo;
+    public void setNombreCargo(String nombreCargo) {
+        this.nombreCargo = nombreCargo;
     }
 
-    public Integer getCodigo_sucursal() {
+    public Integer getCodigoSucursal() {
         return codigoSucursal;
     }
 
-    public void setCodigo_sucursal(Integer codigo_sucursal) {
-        this.codigoSucursal = codigo_sucursal;
+    public void setCodigoSucursal(Integer codigoSucursal) {
+        this.codigoSucursal = codigoSucursal;
     }
+
 
     @Override
     public String toString() {

@@ -1,0 +1,67 @@
+<app-navbar-ventas></app-navbar-ventas>
+<section class="h-100 h-custom" style="background-color: #8fc4b7;">
+        <div class="container py-5 h-100">
+            <div class="row">
+              <div class="col-md-6">
+                <!-- Contenido de la primera mitad de la página -->
+                <div class="card rounded-2">
+                    <table class="table table-success table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nit</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">Opcion</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let cliente of clientes let i= index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{cliente.nit}}</td>
+                            <td>{{cliente.nombre}}</td>
+                            <td>{{cliente.apellido}}</td>
+                            <td>
+                            <button type="button" class="btn btn-warning" (click)="setCliente(i)" >Modificar</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <!-- Contenido de la segunda mitad de la página -->
+                <div class="card rounded-3">
+                    <div class="card-body p-4 p-md-5">
+                      <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Modificar Informacion del Cliente</h3>
+                      <div class="px-md-2">
+                        <div class="form-outline mb-4">
+                          <input type="text" id="form3Example1q" class="form-control"
+                          [(ngModel)]='nombre' />
+                          <label class="form-label" for="form3Example1q">Nombre</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                            <input type="text" id="form3Example1q" class="form-control"
+                            [(ngModel)]='apellido' />
+                            <label class="form-label" for="form3Example1q">Apellido</label>
+                          </div>
+                        <div class="row">
+                          <div class="col-md-6 mb-4">
+                            <div class="form-outline datepicker">
+                              <input [disabled]="true" type="text" class="form-control" id="exampleDatepicker1" 
+                              [(ngModel)]='nit'/>
+                              <label for="exampleDatepicker1" class="form-label">Nit</label>
+                            </div>
+                          </div>
+                          <div class="col-md-6 mb-4">
+                            <button type="button" class="btn btn-danger" (click)="modificar(index)" >Actulizar</button>
+                          </div>
+                        </div>
+                    </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+  </section>
+<app-footer></app-footer>

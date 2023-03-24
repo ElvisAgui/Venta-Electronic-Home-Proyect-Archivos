@@ -6,11 +6,13 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author elvis_agui
  */
+@Repository
 public interface EmpleadoRepository extends JpaRepository<Empleado, String> {
 
     @Query(value = "SELECT empleado.*, cargo.tipo_cargo, cargo.nombre_cargo, empSucur.codigo_sucursal\n" +
@@ -22,5 +24,5 @@ public interface EmpleadoRepository extends JpaRepository<Empleado, String> {
                     "INNER JOIN control_empleado.empleado_sucursal AS empSucur " +
                     "ON empleado.cui = empSucur.cui_empleado " +
                     "WHERE empleado.cui=? AND empleado.passworde=? ;", nativeQuery = true)
-    List<Object[]> getEmpleadoSecion(@Param("cui") String cui, @Param("passworde") String passworde);
+    public List<Object[]> getEmpleadoSecion(@Param("cui") String cui, @Param("passworde") String passworde);
 }

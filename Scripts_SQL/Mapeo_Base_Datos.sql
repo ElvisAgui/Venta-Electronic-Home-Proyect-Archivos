@@ -162,7 +162,7 @@ CREATE TABLE control_venta.venta_producto(
     cantidad_producto INTEGER NOT NULL,
     total_gastado DECIMAL(10,2) NOT NULL,
     descuento DECIMAL(10,2) NOT NULL,
-    ganacia_real DECIMAL(10,3) NOT NULL,
+    ganacia_real DECIMAL(10,2) NOT NULL,
     cui_empleado VARCHAR(13) NOT NULL,
     nit_cliente VARCHAR(13) NOT NULL,
     codigo_sucursal INTEGER NOT NULL, 
@@ -171,6 +171,7 @@ CREATE TABLE control_venta.venta_producto(
     FOREIGN KEY (cui_empleado) REFERENCES control_empleado.empleado(cui) ON UPDATE CASCADE
 );
 ALTER TABLE control_venta.venta_producto ALTER COLUMN codigo TYPE varchar(50);
+ALTER TABLE control_venta.venta_producto ADD COLUMN fecha  TIMESTAMP DEFAULT now();
 
 CREATE TABLE control_venta.items_venta_producto(
     codigo_id SERIAL NOT NULL PRIMARY KEY,
