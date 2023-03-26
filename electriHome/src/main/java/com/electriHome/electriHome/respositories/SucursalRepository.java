@@ -1,4 +1,3 @@
-
 package com.electriHome.electriHome.respositories;
 
 import com.electriHome.electriHome.models.empleados.Sucursal;
@@ -13,9 +12,10 @@ import org.springframework.stereotype.Repository;
  * @author elvis_agui
  */
 @Repository
-public interface SucursalRepository extends JpaRepository<Sucursal, Integer>{
-    
-     
-    
+public interface SucursalRepository extends JpaRepository<Sucursal, Integer> {
+
     Sucursal findById(int id);
+
+    @Override
+    List<Sucursal> findAll();
 }

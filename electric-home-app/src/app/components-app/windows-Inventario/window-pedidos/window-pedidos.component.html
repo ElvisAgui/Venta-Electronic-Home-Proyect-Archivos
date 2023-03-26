@@ -1,0 +1,121 @@
+<app-navbar-inventario></app-navbar-inventario>
+<section class="h-100 h-custom" style="background-color: #394642">
+  <div class="container py-5 h-100">
+    <div class="card">
+      <h2>Tabla de Solicitudes Pendientes</h2>
+      <table class="table table-info table-striped">
+        <thead>
+          <tr>
+            <th scope="col">codigo Producto</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Estado Sol</th>
+            <th scope="col">Cantidad Sol</th>
+            <th scope="col">Sucursal Solicitante</th>
+            <th scope="col">Enviar</th>
+            <th scope="col">Rechazar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pedido of pediosSol let i= index">
+            <td scope="row">{{pedido.codigo}}</td>
+            <td>{{pedido.nombre}}</td>
+            <td>{{pedido.marca}}</td>
+            <td>Pendiente</td>
+            <td class="text-center">{{pedido.cantidad}}</td>
+            <td>{{pedido.sucuralSolicitante}}</td>
+            <th scope="col"><button type="button" class="btn btn-primary"(click)="enviarRespuestaPedido(i)" >Enviar</button>
+            </th>
+            <th scope="col"><button type="button" class="btn btn-warning" (click)="rechazarPedido(i)" >Rechazar</button>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<section class="h-100 h-custom" style="background-color: #394642">
+  <div class="container py-2 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div
+          class="card shadow-2-strong card-registration"
+          style="border-radius: 15px"
+        >
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">
+              Formulario para solicitud de Producto
+            </h3>
+            <div>
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input
+                      type="text"
+                      id="firstName"
+                      class="form-control form-control-lg"
+                      [(ngModel)]='codigoProducto'
+                    />
+                    <label class="form-label" for="firstName"
+                      >Codigo de producto</label
+                    >
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input
+                      type="number"
+                      id="lastName"
+                      class="form-control form-control-lg"
+                      [(ngModel)]='cantidadProducto'
+                    />
+                    <label class="form-label" for="lastName"
+                      >cantidad a pedir</label
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <!-- Example single danger button -->
+                    <div class="btn-group">
+                      <button
+                        type="button"
+                        class="btn btn-danger dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        Sucursal/bodega
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" (click)="selecSucursal(-1)">Bodega</a></li>
+                        <li *ngFor="let sucural of sucursales let i= index">
+                          <a class="dropdown-item" (click)="selecSucursal(i)">{{sucural.nombre}}</a>
+                        </li>
+                      </ul>
+                      <label *ngIf="!eligioBodega" class="form-label" for="lastName"
+                      >{{sucursalPedido.nombre}}</label
+                    >
+                    <label *ngIf="eligioBodega" class="form-label" for="lastName"
+                    >{{bodega.nombre}}</label
+                  >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <button type="button" class="btn btn-primary" (click)="realizarPedido()">
+                      Solicitar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>

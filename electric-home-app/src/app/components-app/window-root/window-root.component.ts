@@ -69,7 +69,9 @@ export class WindowRootComponent implements OnInit {
           this.router.navigate(['Area-Ventas/perfil']);
           break;
         case 2:
-          this.router.navigate(['']);
+          WindowRootComponent.autenticado = true;
+          this.secion.usuario = usuarioSec;
+          this.router.navigate(['Area-Inventario/perfil']);
           break;
         default:
           break;

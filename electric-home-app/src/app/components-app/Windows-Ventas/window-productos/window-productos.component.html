@@ -1,4 +1,9 @@
-<app-navbar-ventas></app-navbar-ventas>
+<div [hidden]="!mostrarNavVenta()">
+  <app-navbar-ventas></app-navbar-ventas>
+</div>
+<div [hidden]="mostrarNavVenta()">
+  <app-navbar-inventario></app-navbar-inventario>
+</div>
 <section class="h-100 h-custom" style="background-color: #394642">
   <div class="container py-5 h-100">
       <div class="card">
@@ -11,6 +16,7 @@
                 <th scope="col">Marca</th>
                 <th scope="col">Precio</th>
                 <th scope="col">Cantidad Existente</th>
+                <th scope="col">Aumentar en 1</th>
               </tr>
             </thead>
             <tbody>
@@ -21,6 +27,7 @@
                 <td>{{producto.marca}}</td>
                 <td>Q {{producto.precio}}</td>
                 <td class="text-center">{{producto.cantidad}}</td>
+                <td class="text-center"><button type="button" class="btn btn-primary" (click)="aumentarEnUno(i)" >aumentar</button></td>
               </tr>
             </tbody>
           </table>

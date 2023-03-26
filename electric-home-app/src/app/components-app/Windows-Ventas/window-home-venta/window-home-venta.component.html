@@ -1,4 +1,9 @@
-<app-navbar-ventas></app-navbar-ventas>
+<div [hidden]="!mostrarNavVenta()">
+  <app-navbar-ventas></app-navbar-ventas>
+</div>
+<div [hidden]="mostrarNavVenta()">
+  <app-navbar-inventario></app-navbar-inventario>
+</div>
 <section class="bg-info">
   <div class="container py-5 h-100" >
     <div

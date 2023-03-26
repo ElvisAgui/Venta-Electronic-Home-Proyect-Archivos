@@ -149,6 +149,21 @@ CREATE TABLE control_almacenamiento.sucursal_almacenamiento_producto(
     FOREIGN KEY (codigo_producto) REFERENCES control_producto.producto_marca(codigo_id)  
 );
 
+CREATE TABLE control_almacenamiento.pedido(
+    codigo_id SERIAL PRIMARY KEY,
+    codigo_producto INTEGER NOT NULL,
+    codigo_sucursal INTEGER,
+    codigo_bodega INTEGER,
+    sucural_solicitante VARCHAR(30) NOT NULL,
+    cantidad INTEGER NOT NULL,
+    estado VARCHAR(12) NOT NULL,
+    cui_empleado VARCHAR(13) NOT NULL,
+    FOREIGN KEY (codigo_sucursal) REFERENCES control_sucursal_bodega.sucursal(codigo_id),
+    FOREIGN KEY (codigo_bodega) REFERENCES control_sucursal_bodega.bodega(codigo_id),
+    FOREIGN KEY (codigo_producto) REFERENCES control_producto.producto_marca(codigo_id),  
+    FOREIGN KEY (cui_empleado) REFERENCES control_empleado.empleado(cui) ON UPDATE CASCADE
+);
+
 
 --tablas del schema de control de ventas
 CREATE TABLE control_venta.cliente(

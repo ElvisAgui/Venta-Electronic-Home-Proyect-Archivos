@@ -25,10 +25,22 @@ INNER JOIN control_producto.producto_marca AS pro_Marc
 ON producto.codigo = pro_Marc.codigo_producto
 INNER JOIN control_producto.marca AS marca
 ON marca.codigo_id=pro_Marc.codigo_marca 
-INNER JOIN control_almacenamiento.sucursal_almacenamiento_producto AS almacen_S
+INNER JOIN control_almacenamiento.bodega_almacenamiento_producto AS almacen_S
 ON almacen_S.codigo_producto = pro_Marc.codigo_id
-WHERE almacen_S.codigo_sucursal = 1;
+WHERE almacen_S.codigo_bodega = 1;
 
 SELECT ganacia_real FROM control_venta.venta_producto WHERE nit_cliente = '35152273';
 
 SELECT ganacia_real FROM control_venta.venta_producto WHERE nit_cliente = '35152273'ORDER BY fecha DESC LIMIT 1;;
+
+
+SELECT pedido.*, producto.nombre, marca.nombre AS "marca", producto.codigo
+FROM control_almacenamiento.pedido AS pedido 
+INNER JOIN control_producto.producto_marca AS pro_Marc
+ON pedido.codigo_producto=pro_Marc.codigo_id
+INNER JOIN control_producto.producto AS producto
+ON producto.codigo = pro_Marc.codigo_producto
+INNER JOIN control_producto.marca AS marca
+ON marca.codigo_id=pro_Marc.codigo_marca
+WHERE pedido.estado = 'Enviado' AND pedido.codigo_sucursal=1;
+ 

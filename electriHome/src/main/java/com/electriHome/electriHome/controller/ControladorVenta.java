@@ -133,7 +133,6 @@ public class ControladorVenta {
                     sucursalP.setCodigoProducto((Integer) result.get(0)[1]);
                     sucursalP.setCodigoSucursal((Integer) result.get(0)[2]);
                     sucursalP.setCantidadExistente(this.calculoCantidadExisitent((Integer) result.get(0)[3], item.getCantidadProducto()));
-                    System.out.println(sucursalP.toString());
                     this.sucursalProductoRpo.save(sucursalP);
                 }
             }

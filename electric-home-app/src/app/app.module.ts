@@ -11,6 +11,9 @@ import { FooterComponent } from './components-app/window-root/footer/footer.comp
 import { WindowVentaComponent } from './components-app/Windows-Ventas/window-venta/window-venta.component';
 import { WindowClientesComponent } from './components-app/Windows-Ventas/window-clientes/window-clientes.component';
 import { WindowProductosComponent } from './components-app/Windows-Ventas/window-productos/window-productos.component';
+import { NavbarInventarioComponent } from './components-app/windows-Inventario/navbar-inventario/navbar-inventario.component';
+import { WindowNewProductoComponent } from './components-app/windows-Inventario/window-new-producto/window-new-producto.component';
+import { WindowPedidosComponent } from './components-app/windows-Inventario/window-pedidos/window-pedidos.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { WindowProductosComponent } from './components-app/Windows-Ventas/window
     FooterComponent,
     WindowVentaComponent,
     WindowClientesComponent,
-    WindowProductosComponent
+    WindowProductosComponent,
+    NavbarInventarioComponent,
+    WindowNewProductoComponent,
+    WindowPedidosComponent
   ],
   imports: [
     BrowserModule,

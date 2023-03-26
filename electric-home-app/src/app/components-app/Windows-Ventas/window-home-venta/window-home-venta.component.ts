@@ -24,4 +24,8 @@ export class WindowHomeVentaComponent implements OnInit {
     this.sucursal=this.secionService.sucursalContratado
     this.usuario = this.secionService.usuario;
   }
+
+  public mostrarNavVenta():boolean{
+    return this.usuario.tipoCargo ==1
+  }
 }
