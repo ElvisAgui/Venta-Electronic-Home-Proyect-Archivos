@@ -14,6 +14,10 @@ import { WindowProductosComponent } from './components-app/Windows-Ventas/window
 import { NavbarInventarioComponent } from './components-app/windows-Inventario/navbar-inventario/navbar-inventario.component';
 import { WindowNewProductoComponent } from './components-app/windows-Inventario/window-new-producto/window-new-producto.component';
 import { WindowPedidosComponent } from './components-app/windows-Inventario/window-pedidos/window-pedidos.component';
+import { NavbarBodegaComponent } from './components-app/Windows-Bodega/navbar-bodega/navbar-bodega.component';
+import { WindowPerfilComponent } from './components-app/Windows-Bodega/window-perfil/window-perfil.component';
+import { WindowProductosBodegaComponent } from './components-app/Windows-Bodega/window-productos-bodega/window-productos-bodega.component';
+import { WindowPedidosBodegaComponent } from './components-app/Windows-Bodega/window-pedidos-bodega/window-pedidos-bodega.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import { WindowPedidosComponent } from './components-app/windows-Inventario/wind
     WindowProductosComponent,
     NavbarInventarioComponent,
     WindowNewProductoComponent,
-    WindowPedidosComponent
+    WindowPedidosComponent,
+    NavbarBodegaComponent,
+    WindowPerfilComponent,
+    WindowProductosBodegaComponent,
+    WindowPedidosBodegaComponent
   ],
   imports: [
     BrowserModule,

@@ -1,50 +1,101 @@
-<app-navbar-inventario></app-navbar-inventario>
+<app-navbar-bodega></app-navbar-bodega>
 <section class="gradient-custom">
-    <div class="container py-5 h-100">
-      <div class="row justify-content-center align-items-center h-100">
-        <div class="col-12 col-lg-9 col-xl-7">
-          <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-            <div class="card-body p-4 p-md-5">
-              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Formulario para Registrar un Producto Nuevo</h3>
-              <div>
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-  
-                    <div class="form-outline">
-                      <input type="text" id="firstName" class="form-control form-control-lg" />
-                      <label class="form-label" for="firstName">Nombre del Producto</label>
-                    </div>
-  
+  <div class="container py-5 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Formulario para Registrar un Producto Nuevo</h3>
+            <div>
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" id="firstName" class="form-control form-control-lg"
+                    [(ngModel)]="nombrePro" />
+                    <label class="form-label" for="firstName">Nombre del Producto</label>
                   </div>
-                  <div class="col-md-6 mb-4">
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" id="lastName" placeholder="example 00123500" class="form-control form-control-lg"
+                    [(ngModel)]='codigoPro'  [disabled]="isModificacion" />
+                    <label class="form-label" for="lastName">Codigo Producto</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-4 d-flex align-items-center">
+                  <div class="form-outline datepicker w-100">
+                    <input type="number" class="form-control form-control-lg" id="birthdayDate" 
+                    [(ngModel)]='cantidadExiste' />
+                    <label for="birthdayDate" class="form-label">cantidad Existente</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4 d-flex align-items-center">
+                  <div class="form-outline datepicker w-100">
+                    <input type="number" class="form-control form-control-lg" id="birthdayDate" 
+                    [(ngModel)]='precio' />
+                    <label for="birthdayDate" class="form-label">Precio</label>
+                  </div>
+                </div>
+              </div>
+              <div [hidden]="isModificacion" class="row">
+                  <div class="col-md-12 mb-4">
                     <div class="form-outline">
-                      <input type="text" id="lastName" class="form-control form-control-lg" />
-                      <label class="form-label" for="lastName">Marca del producto</label>
+                      <input type="text" id="lastName" placeholder="pequeña descripcion obligatoria"
+                       class="form-control form-control-lg" [(ngModel)]='descripcionPro' />
+                      <label class="form-label" for="lastName">Descripcion</label>
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6 mb-4 d-flex align-items-center">
                     <div class="form-outline datepicker w-100">
-                      <input type="text" class="form-control form-control-lg" id="birthdayDate" />
-                      <label for="birthdayDate" class="form-label">cantidad Existente</label>
+                      <select [(ngModel)]='selecMarca' class="form-select" aria-label="Default select example">
+                          <option *ngFor="let marca of marcas let i= index" value={{i}}>{{marca.nombre}}</option>
+                        </select>
+                      <label for="birthdayDate" class="form-label">elige la marca</label>
+                    </div>
+                  </div>
+                  <div [hidden]="isModificacion" class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <button type="button" class="btn btn-info" (click)="crearNuevoProducto()" >new Marca</button>
+                      <label class="form-label" for="lastName"></label>
+                    </div>
+                  </div>
+                  <div [hidden]="!isModificacion" class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label class="form-label" for="lastName">{{productoModificacion.marca}}</label>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="crearNuevoMarca" class="row">
+                  <div class="col-md-6 mb-4 d-flex align-items-center">
+                    <div class="form-outline datepicker w-100">
+                      <input type="text" class="form-control form-control-lg" id="birthdayDate"
+                      [(ngModel)]='nombreMarca' />
+                      <label for="birthdayDate" class="form-label">Nombre Marca</label>
                     </div>
                   </div>
                   <div class="col-md-6 mb-4">
                     <div class="form-outline">
-                      <input type="text" id="lastName" placeholder="example 00123500" class="form-control form-control-lg" />
-                      <label class="form-label" for="lastName">Codigo Producto</label>
+                      <input type="text" id="lastName" placeholder="pequeña descripcion obligatoria" 
+                      class="form-control form-control-lg" [(ngModel)]='descriptMarca' />
+                      <label class="form-label" for="lastName">Descripcion</label>
                     </div>
                   </div>
                 </div>
-                <div class="mt-4 pt-2">
-                    <button type="button" class="btn btn-primary">Registrar</button>
-                </div>
+              <div [hidden]="isModificacion" class="mt-4 pt-2">
+                  <button type="button" class="btn btn-primary" (click)="saveProductoMarca()" >Registrar</button>
+              </div>
+              <div [hidden]="!isModificacion" class="mt-4 pt-2">
+                <button type="button" class="btn btn-primary"  (click)="actulizarProducto()" >Actulizar</button>
             </div>
-            </div>
+          </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 <app-footer></app-footer>

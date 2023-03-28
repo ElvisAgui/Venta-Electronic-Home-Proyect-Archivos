@@ -53,7 +53,7 @@ public class InventarioController {
     @Autowired
     PedidoRepository pedidoRpo;
 
-    @PostMapping(path = "savePedido")
+    @PostMapping(path = "/savePedido")
     public boolean savePedido(@RequestBody Pedido pedido) {
         try {
             if (pedido.getCodigoBodega() == 0) {
@@ -62,7 +62,6 @@ public class InventarioController {
                 pedido.setCodigoSucursal(null);
             }
             Pedido pedio = this.pedidoRpo.save(pedido);
-            System.out.println(pedio);
             return pedido != null;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -70,7 +69,7 @@ public class InventarioController {
         }
     }
 
-    @PutMapping(path = "solucionPedido")
+    @PutMapping(path = "/solucionPedido")
     public boolean solucionPido(@RequestBody SolucionPedido solPedido, @RequestParam Integer SucurDescuento) {
         try {
             this.procesoUpdateProductoSucurAumento(solPedido);
@@ -97,7 +96,7 @@ public class InventarioController {
 
     }
 
-    @PutMapping(path = "rechazarPedido")
+    @PutMapping(path = "/rechazarPedido")
     public boolean updateEstadoPedidoRechazado(@RequestBody SolucionPedido solPedido) {
         try {
             Pedido pedido = new Pedido();
@@ -126,6 +125,7 @@ public class InventarioController {
             sucursalP.setCodigoProducto((Integer) result.get(0)[1]);
             sucursalP.setCodigoSucursal((Integer) result.get(0)[2]);
             sucursalP.setCantidadExistente(this.calculoCantidadExisitent((Integer) result.get(0)[3], solPedido.getCantidad(), true));
+            this.sucursalProductoRpo.save(sucursalP);
         }
     }
 
@@ -142,6 +142,7 @@ public class InventarioController {
             sucursalP.setCodigoSucursal(solPedido.getCodigoSucursal());
             sucursalP.setCantidadExistente(solPedido.getCantidad());
         }
+        this.sucursalProductoRpo.save(sucursalP);
     }
 
     private Integer calculoCantidadExisitent(Integer cantActu, Integer cantCompra, boolean isDescuento) {

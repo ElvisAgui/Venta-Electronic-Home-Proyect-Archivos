@@ -29,5 +29,17 @@ public interface SolucionPedidoRepository extends JpaRepository<SolucionPedido, 
             + "ON marca.codigo_id=pro_Marc.codigo_marca "
             + "WHERE pedido.estado = ? AND pedido.codigo_sucursal=?;", nativeQuery = true)
     public List<Object[]> getSolicitudesSucursal(@Param("estado") String estado, @Param("codigoSucur") Integer codigoSucur);
+    
+    
+    @Query(value = "SELECT pedido.*, producto.nombre, marca.nombre AS \"marca\", producto.codigo "
+            + "FROM control_almacenamiento.pedido AS pedido "
+            + "INNER JOIN control_producto.producto_marca AS pro_Marc "
+            + "ON pedido.codigo_producto=pro_Marc.codigo_id "
+            + "INNER JOIN control_producto.producto AS producto "
+            + "ON producto.codigo = pro_Marc.codigo_producto "
+            + "INNER JOIN control_producto.marca AS marca "
+            + "ON marca.codigo_id=pro_Marc.codigo_marca "
+            + "WHERE pedido.estado = ? AND pedido.codigo_bodega=?;", nativeQuery = true)
+    public List<Object[]> getSolicitudesBodega(@Param("estado") String estado, @Param("codigoSucur") Integer codigoSucur);
 
 }

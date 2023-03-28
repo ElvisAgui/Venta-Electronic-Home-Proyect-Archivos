@@ -126,6 +126,7 @@ CREATE TABLE control_producto.producto_marca(
     FOREIGN KEY (codigo_producto) REFERENCES control_producto.producto(codigo) ON UPDATE CASCADE
 );
 ALTER TABLE control_producto.producto_marca ADD COLUMN precio DECIMAL(10,2) NOT NULL;
+ALTER TABLE control_producto.producto_marca ADD CONSTRAINT producto_marca_nombre_dni_unique UNIQUE (codigo_marca, codigo_producto);
 
 
 --tablas del schema control de almacenamiento de productos en bodegas y sucursales

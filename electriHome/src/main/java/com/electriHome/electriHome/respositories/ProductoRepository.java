@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 
-    @Query(value = "SELECT pro_Marc.codigo_id, producto.nombre, producto.precio, marca.nombre AS \"marca\",  almacen_S.cantidad_existente "
+    @Query(value = "SELECT pro_Marc.codigo_id, producto.nombre, pro_Marc.precio, marca.nombre AS \"marca\",  almacen_S.cantidad_existente "
             + "FROM control_producto.producto AS producto "
             + "INNER JOIN control_producto.producto_marca AS pro_Marc "
             + "ON producto.codigo = pro_Marc.codigo_producto "
@@ -25,7 +25,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
             + "WHERE almacen_S.codigo_sucursal = ? AND producto.codigo=?;", nativeQuery = true)
     public List<Object[]> getProductoSucursal(@Param("codigoSucur") Integer codigoSucur, @Param("codigoP") String codigoP);
     
-    @Query(value = "SELECT pro_Marc.codigo_id, producto.nombre, producto.precio, marca.nombre AS \"marca\",  almacen_S.cantidad_existente "
+    @Query(value = "SELECT pro_Marc.codigo_id, producto.nombre, pro_Marc.precio, marca.nombre AS \"marca\",  almacen_S.cantidad_existente "
             + "FROM control_producto.producto AS producto "
             + "INNER JOIN control_producto.producto_marca AS pro_Marc "
             + "ON producto.codigo = pro_Marc.codigo_producto "
@@ -37,7 +37,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
     public List<Object[]> getProductoBodega(@Param("codigoSucur") Integer codigoSucur, @Param("codigoP") String codigoP);
     
     
-    @Query(value = "SELECT pro_Marc.codigo_id, producto.nombre, producto.precio, marca.nombre AS \"marca\",  almacen_S.cantidad_existente, producto.codigo "
+    @Query(value = "SELECT pro_Marc.codigo_id, producto.nombre, pro_Marc.precio, marca.nombre AS \"marca\",  almacen_S.cantidad_existente, producto.codigo "
             + "FROM control_producto.producto AS producto "
             + "INNER JOIN control_producto.producto_marca AS pro_Marc "
             + "ON producto.codigo = pro_Marc.codigo_producto "
@@ -47,5 +47,18 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
             + "ON almacen_S.codigo_producto = pro_Marc.codigo_id "
             + "WHERE almacen_S.codigo_sucursal = ?;", nativeQuery = true)
     public List<Object[]> getListProductosSucursal(@Param("codigoSucur") Integer codigoSucur);
+    
+    
+    
+    @Query(value = "SELECT pro_Marc.codigo_id, producto.nombre, pro_Marc.precio, marca.nombre AS \"marca\",  almacen_S.cantidad_existente, producto.codigo "
+            + "FROM control_producto.producto AS producto "
+            + "INNER JOIN control_producto.producto_marca AS pro_Marc "
+            + "ON producto.codigo = pro_Marc.codigo_producto "
+            + "INNER JOIN control_producto.marca AS marca "
+            + "ON marca.codigo_id=pro_Marc.codigo_marca  "
+            + "INNER JOIN control_almacenamiento.bodega_almacenamiento_producto AS almacen_S "
+            + "ON almacen_S.codigo_producto = pro_Marc.codigo_id "
+            + "WHERE almacen_S.codigo_bodega = ?;", nativeQuery = true)
+    public List<Object[]> getListProductosBodega(@Param("codigoBodega") Integer codigoBodega);
 
 }

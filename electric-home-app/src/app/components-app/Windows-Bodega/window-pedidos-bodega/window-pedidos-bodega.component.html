@@ -1,0 +1,38 @@
+
+<app-navbar-bodega></app-navbar-bodega>
+<section class="h-100 h-custom" style="background-color: #394642">
+    <div class="container py-5 h-100">
+      <div class="card">
+        <h2>Tabla de Solicitudes Pendientes</h2>
+        <table class="table table-info table-striped">
+          <thead>
+            <tr>
+              <th scope="col">codigo Producto</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Marca</th>
+              <th scope="col">Estado Sol</th>
+              <th scope="col">Cantidad Sol</th>
+              <th scope="col">Sucursal Solicitante</th>
+              <th scope="col">Enviar</th>
+              <th scope="col">Rechazar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pedido of pediosSol let i= index">
+              <td scope="row">{{pedido.codigo}}</td>
+              <td>{{pedido.nombre}}</td>
+              <td>{{pedido.marca}}</td>
+              <td>Pendiente</td>
+              <td class="text-center">{{pedido.cantidad}}</td>
+              <td>{{pedido.sucuralSolicitante}}</td>
+              <th scope="col"><button type="button" class="btn btn-primary" (click)="enviarRespuestaPedido(i)" >Enviar</button>
+              </th>
+              <th scope="col"><button type="button" class="btn btn-warning" (click)="rechazarPedido(i)"  >Rechazar</button>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <app-footer></app-footer>

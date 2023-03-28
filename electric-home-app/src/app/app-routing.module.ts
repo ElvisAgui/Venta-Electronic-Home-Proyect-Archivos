@@ -1,3 +1,6 @@
+import { WindowPedidosBodegaComponent } from './components-app/Windows-Bodega/window-pedidos-bodega/window-pedidos-bodega.component';
+import { WindowProductosBodegaComponent } from './components-app/Windows-Bodega/window-productos-bodega/window-productos-bodega.component';
+import { WindowPerfilComponent } from './components-app/Windows-Bodega/window-perfil/window-perfil.component';
 import { WindowPedidosComponent } from './components-app/windows-Inventario/window-pedidos/window-pedidos.component';
 import { WindowNewProductoComponent } from './components-app/windows-Inventario/window-new-producto/window-new-producto.component';
 import { WindowProductosComponent } from './components-app/Windows-Ventas/window-productos/window-productos.component';
@@ -50,13 +53,28 @@ const routes: Routes = [
     canActivate: [AutenticacionService],
   },
   {
-    path:'Area-Inventario/newProducto',
+    path:'Area-Bodega/newProducto',
     component: WindowNewProductoComponent,
     canActivate: [AutenticacionService],
   },
   {
     path:'Area-Inventario/pedidos',
     component:WindowPedidosComponent,
+    canActivate: [AutenticacionService],
+  },
+  {
+    path:'Area-Bodega/perfil',
+    component: WindowPerfilComponent,
+    canActivate: [AutenticacionService],
+  },
+  {
+    path:'Area-Bodega/productos',
+    component: WindowProductosBodegaComponent,
+    canActivate: [AutenticacionService],
+  },
+  {
+    path:'Area-Bodega/solicitudes',
+    component: WindowPedidosBodegaComponent,
     canActivate: [AutenticacionService],
   },
   {

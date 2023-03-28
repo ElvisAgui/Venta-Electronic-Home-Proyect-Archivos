@@ -6,6 +6,8 @@ import { RouterModule, Routes, CanActivate, Router } from '@angular/router';
 
 import { Usuario } from 'src/class-models/usuario';
 import { Sucursal } from 'src/class-models/sucursal';
+import { Bodega } from 'src/class-models/bodega';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-window-root',
   templateUrl: './window-root.component.html',
@@ -38,14 +40,48 @@ export class WindowRootComponent implements OnInit {
           cui: null,
           passworde: null,
         });
-        this.usuario = created;
-        this.getSucursal();
+        if (created != null) {
+          this.usuario = created;
+        this.getAreaTrabajo()
+        }else{
+          Swal.fire(
+            'Upss!!',
+            'Ingresa correctamente el usuario y la contraseña',
+            'question'
+          );
+        }
       },
       (erro: any) => {
         //pag errro
         console.log('peticion xd');
       }
     );
+  }
+
+  private getAreaTrabajo() {
+    switch (this.usuario.tipoCargo) {
+      case 1:
+        this.getSucursal();
+        break;
+      case 2:
+        this.getSucursal();
+        break;
+      case 3:
+        this.getBodega();
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  private getBodega() {
+    this.serviceLogin
+      .getBodegaContratado(this.usuario)
+      .subscribe((sucu: Bodega) => {
+        this.secion.bodegaContratado = sucu;
+        this.digeAreaTrabajo(this.usuario);
+      });
   }
 
   public getSucursal() {
@@ -72,6 +108,11 @@ export class WindowRootComponent implements OnInit {
           WindowRootComponent.autenticado = true;
           this.secion.usuario = usuarioSec;
           this.router.navigate(['Area-Inventario/perfil']);
+          break;
+        case 3:
+          WindowRootComponent.autenticado = true;
+          this.secion.usuario = usuarioSec;
+          this.router.navigate(['Area-Bodega/perfil']);
           break;
         default:
           break;

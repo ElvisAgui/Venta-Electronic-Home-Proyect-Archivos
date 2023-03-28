@@ -1,3 +1,4 @@
+import { Bodega } from './../../class-models/bodega';
 import { Producto } from 'src/class-models/producto';
 import { Sucursal } from './../../class-models/sucursal';
 import { Injectable } from '@angular/core';
@@ -11,8 +12,12 @@ export class CreateSecionService {
   
   usuario!: Usuario;
   sucursalContratado!:Sucursal;
+  bodegaContratado!:Bodega
   clientes:Cliente[]=[]
   porductos:Producto[]=[]
+  ismodificacion= false
+
+  productoModificacion:Producto= new Producto()
 
   constructor() { }
 
