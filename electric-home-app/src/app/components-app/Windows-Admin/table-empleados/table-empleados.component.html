@@ -1,0 +1,24 @@
+<h3 *ngIf="sesion.tipoReport == 2" class="text-center">Top 3 empleados con más ventas</h3>
+<h3 *ngIf="sesion.tipoReport == 3"  class="text-center">Top 3 empleados con más Ingresos</h3>
+<table class="table table-info table-striped">
+    <thead>
+      <tr>
+        <th scope="col">No.</th>
+        <th scope="col">CUI</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th *ngIf="sesion.tipoReport == 2" scope="col">Productos Vendidos</th>
+        <th *ngIf="sesion.tipoReport == 3" scope="col">Ingresos Generados</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let empleado of empleados let i= index"  >
+        <td>{{i+1}}</td>
+        <th scope="row">{{empleado.cuiEmpleado}}</th>
+        <td>{{empleado.nombre}}</td>
+        <td>{{empleado.apellido}}</td>
+        <td *ngIf="sesion.tipoReport == 2" class="text-center" >{{empleado.productos}}</td>
+        <td *ngIf="sesion.tipoReport == 3" class="text-center" > Q {{empleado.ganancia}}</td>
+      </tr>
+    </tbody>
+  </table>

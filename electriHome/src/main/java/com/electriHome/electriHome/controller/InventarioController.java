@@ -106,7 +106,7 @@ public class InventarioController {
             pedido.setCodigoBodega(solPedido.getCodigoBodega());
             pedido.setSucuralSolicitante(solPedido.getSucuralSolicitante());
             pedido.setCantidad(solPedido.getCantidad());
-            pedido.setEstado(solPedido.getEstado());
+            pedido.setEstado("Rechazado");
             pedido.setCuiEmpleado(solPedido.getCuiEmpleado());
             this.pedidoRpo.save(pedido);
             return true;

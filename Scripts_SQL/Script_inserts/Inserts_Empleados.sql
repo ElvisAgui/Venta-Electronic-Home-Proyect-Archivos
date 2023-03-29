@@ -55,6 +55,9 @@ INSERT INTO control_empleado.empleado_bodega(codigo_bodega,cui_empleado) VALUES
 (1,'3448272350901'),
 (1,'3235278450801');
 
+--admin contratadoo en la sucursal central
+INSERT INTO control_empleado.empleado_sucursal(codigo_sucursal,cui_empleado) VALUES
+(1,'3255752250801');
 /*
 usuario 3245German Q5Grz1loZT1QhO0uVvtwoQ==
 usuario 3348Jose iN1pQWJtQp9Q8/i0FYbiVA==

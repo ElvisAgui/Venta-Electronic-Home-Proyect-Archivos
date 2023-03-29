@@ -1,0 +1,20 @@
+<h3 *ngIf="sesion.tipoReport == 8" class="text-center">Top 3 sucursales con más ventas</h3>
+<h3 *ngIf="sesion.tipoReport == 9"  class="text-center">Top 3 sucursales con más ingresos</h3>
+<table class="table table-info table-striped">
+    <thead>
+      <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Sucursal</th>
+        <th *ngIf="sesion.tipoReport == 8" scope="col">Ventas Realizadas</th>
+        <th *ngIf="sesion.tipoReport == 9" scope="col">Ingresos Generados</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let sucursal of Sucursales let i= index"  >
+        <td>{{i+1}}</td>
+        <th scope="row">{{sucursal.nombre}}</th>
+        <td *ngIf="sesion.tipoReport == 8" >{{sucursal.totalVentas}}</td>
+        <td *ngIf="sesion.tipoReport == 9" > Q {{sucursal.totalIngresos}}</td>
+      </tr>
+    </tbody>
+  </table>

@@ -1,0 +1,42 @@
+
+<h3 *ngIf="sesion.tipoReport == 4" class="text-center">Top 10 productos más vendidos</h3>
+<h3 *ngIf="sesion.tipoReport == 5" class="text-center">Top 10 productos con más ingresos</h3>
+<h3 *ngIf="sesion.tipoReport == 6" class="text-center">Top 5 productos más vendidos por sucursal</h3>
+<h3 *ngIf="sesion.tipoReport == 7" class="text-center">Top 5 productos con más ingresos por sucursal</h3>
+
+<!-- Example single danger button -->
+<div *ngIf="sesion.tipoReport == 6 || sesion.tipoReport== 7" class="btn-group">
+    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      Cambio Sucursal
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" type="button" (click)="cambioSucursa(1)" >Sucursal Central</a></li>
+      <li><a class="dropdown-item" type="button" (click)="cambioSucursa(2)" >Sucursal Norte</a></li>
+      <li><a class="dropdown-item" type="button" (click)="cambioSucursa(3)" >Sucursal Sur</a></li>
+    </ul>
+  </div> 
+<h5 *ngIf="sesion.tipoReport == 6 || sesion.tipoReport== 7">{{nameSucursal}}</h5>
+<table class="table table-info table-striped">
+    <thead>
+      <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Codigo</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Precio U</th>
+        <th *ngIf="sesion.tipoReport == 4 || sesion.tipoReport == 6" scope="col">Veces Vendida</th>
+        <th *ngIf="sesion.tipoReport == 5 || sesion.tipoReport == 7" scope="col">Ingresos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productos let i= index"  >
+        <td>{{i+1}}</td>
+        <th scope="row">{{producto.codigo}}</th>
+        <td>{{producto.nombre}}</td>
+        <td>{{producto.marca}}</td>
+        <td  >Q {{producto.precio}}</td>
+        <td *ngIf="sesion.tipoReport == 4 || sesion.tipoReport == 6" class="text-center">{{producto.vecesVendida}}</td>
+        <td *ngIf="sesion.tipoReport == 5 || sesion.tipoReport == 7" >Q {{producto.ingresos}}</td>
+      </tr>
+    </tbody>
+  </table>

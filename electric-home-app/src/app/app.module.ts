@@ -18,6 +18,14 @@ import { NavbarBodegaComponent } from './components-app/Windows-Bodega/navbar-bo
 import { WindowPerfilComponent } from './components-app/Windows-Bodega/window-perfil/window-perfil.component';
 import { WindowProductosBodegaComponent } from './components-app/Windows-Bodega/window-productos-bodega/window-productos-bodega.component';
 import { WindowPedidosBodegaComponent } from './components-app/Windows-Bodega/window-pedidos-bodega/window-pedidos-bodega.component';
+import { WindowNewEmpleadoComponent } from './components-app/Windows-Admin/window-new-empleado/window-new-empleado.component';
+import { WindowPerfilAdminComponent } from './components-app/Windows-Admin/window-perfil-admin/window-perfil-admin.component';
+import { NavbarAdminComponent } from './components-app/Windows-Admin/navbar-admin/navbar-admin.component';
+import { TableClientesComponent } from './components-app/Windows-Admin/table-clientes/table-clientes.component';
+import { AreaReportesComponent } from './components-app/Windows-Admin/area-reportes/area-reportes.component';
+import { TableEmpleadosComponent } from './components-app/Windows-Admin/table-empleados/table-empleados.component';
+import { TableProductosComponent } from './components-app/Windows-Admin/table-productos/table-productos.component';
+import { TableSucursaleComponent } from './components-app/Windows-Admin/table-sucursale/table-sucursale.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +43,15 @@ import { WindowPedidosBodegaComponent } from './components-app/Windows-Bodega/wi
     NavbarBodegaComponent,
     WindowPerfilComponent,
     WindowProductosBodegaComponent,
-    WindowPedidosBodegaComponent
+    WindowPedidosBodegaComponent,
+    WindowNewEmpleadoComponent,
+    WindowPerfilAdminComponent,
+    NavbarAdminComponent,
+    TableClientesComponent,
+    AreaReportesComponent,
+    TableEmpleadosComponent,
+    TableProductosComponent,
+    TableSucursaleComponent,
   ],
   imports: [
     BrowserModule,

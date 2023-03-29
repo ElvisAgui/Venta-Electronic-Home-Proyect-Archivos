@@ -44,6 +44,120 @@ INNER JOIN control_producto.marca AS marca
 ON marca.codigo_id=pro_Marc.codigo_marca
 WHERE pedido.estado = 'Enviado' AND pedido.codigo_sucursal=1;
  
+SELECT venta.nit_cliente, cliente.nombre, cliente.apellido,
+SUM(venta.total_gastado) AS Ganancia, SUM(venta.cantidad_producto) AS productos
+FROM control_venta.venta_producto AS venta
+INNER JOIN control_venta.cliente AS cliente
+ON venta.nit_cliente = cliente.nit
+GROUP BY nit_cliente,cliente.nombre, cliente.apellido
+ORDER BY Ganancia DESC LIMIT 10;
+
+
+--empleados con más ventas 
+SELECT venta.cui_empleado, empleado.nombre, empleado.apellido,
+SUM(venta.cantidad_producto) AS productos
+FROM control_venta.venta_producto AS venta
+INNER JOIN control_empleado.empleado AS empleado
+ON venta.cui_empleado = empleado.cui
+GROUP BY venta.cui_empleado,empleado.nombre, empleado.apellido
+ORDER BY productos DESC LIMIT 10;
+
+---empleados con más ingresos 
+
+SELECT venta.cui_empleado, empleado.nombre, empleado.apellido,
+SUM(venta.total_gastado) AS Ganancia
+FROM control_venta.venta_producto AS venta
+INNER JOIN control_empleado.empleado AS empleado
+ON venta.cui_empleado = empleado.cui
+GROUP BY venta.cui_empleado,empleado.nombre, empleado.apellido
+ORDER BY Ganancia DESC LIMIT 3;
+
+
+--productos más vendidos
+SELECT producto.codigo, producto.nombre, prod_Marc.precio, marca.nombre AS  "marca",
+SUM(item.cantidad_producto) AS veces_vendida
+FROM control_venta.items_venta_producto AS item
+INNER JOIN control_producto.producto_marca AS prod_marc
+ON item.codigo_producto = prod_marc.codigo_id
+INNER JOIN control_producto.producto AS producto
+ON prod_marc.codigo_producto = producto.codigo
+INNER JOIN control_producto.marca AS marca
+ON prod_marc.codigo_marca = marca.codigo_id
+GROUP BY producto.codigo, producto.nombre, prod_Marc.precio,marca.nombre,item.codigo_producto
+ORDER BY veces_vendida DESC LIMIT 10;
+
+
+SELECT control_venta.items_venta_producto.codigo_producto , SUM(control_venta.items_venta_producto.cantidad_producto)  AS veces_vendida FROM control_venta.items_venta_producto
+GROUP BY control_venta.items_venta_producto.codigo_producto
+ORDER BY veces_vendida DESC LIMIT 10;
+
+
+--productos más ingresos
+SELECT producto.codigo, producto.nombre, prod_Marc.precio, marca.nombre AS  "marca",
+SUM(item.cantidad_producto) * prod_Marc.precio AS ingresos
+FROM control_venta.items_venta_producto AS item
+INNER JOIN control_producto.producto_marca AS prod_marc
+ON item.codigo_producto = prod_marc.codigo_id
+INNER JOIN control_producto.producto AS producto
+ON prod_marc.codigo_producto = producto.codigo
+INNER JOIN control_producto.marca AS marca
+ON prod_marc.codigo_marca = marca.codigo_id
+GROUP BY producto.codigo, producto.nombre, prod_Marc.precio,marca.nombre,item.codigo_producto
+ORDER BY ingresos DESC LIMIT 10;
+
+
+--productos más vendidos por sucursal
+SELECT producto.codigo, producto.nombre, prod_Marc.precio, marca.nombre AS  "marca",
+SUM(item.cantidad_producto) AS veces_vendida
+FROM control_venta.items_venta_producto AS item
+INNER JOIN control_producto.producto_marca AS prod_marc
+ON item.codigo_producto = prod_marc.codigo_id
+INNER JOIN control_producto.producto AS producto
+ON prod_marc.codigo_producto = producto.codigo
+INNER JOIN control_producto.marca AS marca
+ON prod_marc.codigo_marca = marca.codigo_id
+INNER JOIN control_venta.venta_producto AS venta
+ON venta.codigo = item.codigo_venta_producto
+WHERE venta.codigo_sucursal=1
+GROUP BY producto.codigo, producto.nombre, prod_Marc.precio,marca.nombre,item.codigo_producto
+ORDER BY veces_vendida DESC LIMIT 5;
+
+
+--productos más ingresos oor sucursal
+SELECT producto.codigo, producto.nombre, prod_Marc.precio, marca.nombre AS  "marca",
+SUM(item.cantidad_producto) * prod_Marc.precio AS ingresos
+FROM control_venta.items_venta_producto AS item
+INNER JOIN control_producto.producto_marca AS prod_marc
+ON item.codigo_producto = prod_marc.codigo_id
+INNER JOIN control_producto.producto AS producto
+ON prod_marc.codigo_producto = producto.codigo
+INNER JOIN control_producto.marca AS marca
+ON prod_marc.codigo_marca = marca.codigo_id
+INNER JOIN control_venta.venta_producto AS venta
+ON venta.codigo = item.codigo_venta_producto
+WHERE venta.codigo_sucursal=1
+GROUP BY producto.codigo, producto.nombre, prod_Marc.precio,marca.nombre,item.codigo_producto
+ORDER BY ingresos DESC LIMIT 5;
+
+
+--sucursal mas ventas
+SELECT control_sucursal_bodega.sucursal.nombre, COUNT(*) AS total_ventas
+FROM control_venta.venta_producto INNER JOIN
+control_sucursal_bodega.sucursal ON control_sucursal_bodega.sucursal.codigo_id=control_venta.venta_producto.codigo_sucursal
+GROUP BY codigo_sucursal,control_sucursal_bodega.sucursal.nombre
+ORDER BY total_ventas DESC;
+
+
+--sucursal mas ingresos
+SELECT control_sucursal_bodega.sucursal.nombre, SUM(control_venta.venta_producto.total_gastado) AS total_ganancia
+FROM control_venta.venta_producto INNER JOIN
+control_sucursal_bodega.sucursal ON control_sucursal_bodega.sucursal.codigo_id=control_venta.venta_producto.codigo_sucursal
+GROUP BY control_venta.venta_producto.codigo_sucursal,control_sucursal_bodega.sucursal.nombre
+ORDER BY total_ganancia DESC;
+
+
+
+
 
 INSERT INTO control_producto.producto(codigo, nombre, descripcion, precio) VALUES
 ('00111100','Deshumidificador LG 01','Deshumidificador marca lg mayor resistencia',520.99);--lG

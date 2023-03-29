@@ -1,0 +1,51 @@
+<app-navbar-admin></app-navbar-admin>
+<section class="gradient-custom">
+    <div *ngIf="sesion.tipoReport==1" class="container py-5 h-100">
+        <div class="card">
+            <app-table-clientes></app-table-clientes>
+        </div>
+    </div>
+    <div *ngIf="sesion.tipoReport==2 " class="container py-5 h-100">
+        <div class="card">
+            <app-table-empleados></app-table-empleados>
+        </div>
+    </div>
+    <div *ngIf=" sesion.tipoReport == 3" class="container py-5 h-100">
+        <div class="card">
+            <app-table-empleados></app-table-empleados>
+        </div>
+    </div>
+    <div *ngIf="sesion.tipoReport== 4" class="container py-5 h-100">
+        <div class="card">
+            <app-table-productos></app-table-productos>
+        </div>
+    </div>
+    <div *ngIf="sesion.tipoReport == 5 " class="container py-5 h-100">
+        <div class="card">
+            <app-table-productos></app-table-productos>
+        </div>
+    </div>
+    <div *ngIf=" sesion.tipoReport== 6" class="container py-5 h-100">
+        <div class="card">
+            <app-table-productos></app-table-productos>
+        </div>
+    </div>
+    <div *ngIf="sesion.tipoReport == 7" class="container py-5 h-100">
+        <div class="card">
+            <app-table-productos></app-table-productos>
+        </div>
+    </div>
+
+    <div *ngIf="sesion.tipoReport==8 " class="container py-5 h-100">
+        <div class="card">
+            <app-table-sucursale></app-table-sucursale>
+        </div>
+    </div>
+    <div *ngIf=" sesion.tipoReport == 9" class="container py-5 h-100">
+        <div class="card">
+            <app-table-sucursale></app-table-sucursale>
+        </div>
+    </div>
+  </section>
+
+<app-footer></app-footer>

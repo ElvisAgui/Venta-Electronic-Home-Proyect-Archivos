@@ -12,4 +12,8 @@ export class FooterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public openLink() {
+    window.open('https://github.com/ElvisAgui/Venta-Electronic-Home-Proyect-Archivos', '_blank');
+  }
+
 }

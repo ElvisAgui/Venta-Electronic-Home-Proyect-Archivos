@@ -1,0 +1,23 @@
+<h3 class="text-center">Top 10 de clientes que más ganancias generan</h3>
+<table class="table table-info table-striped">
+    <thead>
+      <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Nit</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Ganancia Generada</th>
+        <th scope="col">No. Productos comprados</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clienteRepo let i= index"  >
+        <td>{{i+1}}</td>
+        <th scope="row">{{cliente.nitCliente}}</th>
+        <td>{{cliente.nombre}}</td>
+        <td>{{cliente.apellido}}</td>
+        <td class="text-center" >Q {{cliente.ganacia}}</td>
+        <td class="text-center">{{cliente.productos}}</td>
+      </tr>
+    </tbody>
+  </table>

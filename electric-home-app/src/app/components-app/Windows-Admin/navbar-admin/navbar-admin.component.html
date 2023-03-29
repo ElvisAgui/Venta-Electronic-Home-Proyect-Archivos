@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <button
+        class="navbar-toggler"
+        type="button"
+        aria-controls="navbarTogglerDemo01"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" >Administracion</a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" type="button" (click)="dirigePerfil()"  >Perfil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" type="button" (click)="dirigeNewEmpleado()"  >Area Empleados</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Reportes</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" type="button" (click)="goReport(1)" >clientes que más ganancias generan</a></li>
+              <li><a class="dropdown-item" type="button" (click)="goReport(2)"  >empleados con más ventas</a></li>
+              <li><a class="dropdown-item" type="button" (click)="goReport(3)"  >empleados con más ingresos</a></li>
+              <li><a class="dropdown-item" type="button" (click)="goReport(4)"  >productos más vendidos</a></li>
+              <li><a class="dropdown-item" type="button" (click)="goReport(5)"  >productos con más ingresos</a></li>
+              <li><a class="dropdown-item" type="button" (click)="goReport(6)"  >productos más vendidos por sucursal</a></li>
+              <li><a class="dropdown-item" type="button" (click)="goReport(7)"  >productos con más ingresos por sucursal</a></li>
+              <li><a class="dropdown-item" type="button" (click)="goReport(8)"  >sucursales con más ventas</a></li>
+              <li><a class="dropdown-item" type="button" (click)="goReport(9)"  >sucursales con más ingresos</a></li>
+            </ul>
+          </li>        
+        </ul>
+      </div>
+      <a class="navbar-brand" type="button">{{usuario.nombre}}</a>
+    </div>
+  </nav>

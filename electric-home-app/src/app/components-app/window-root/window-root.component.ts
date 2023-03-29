@@ -69,8 +69,8 @@ export class WindowRootComponent implements OnInit {
       case 3:
         this.getBodega();
         break;
-
       default:
+        this.digeAreaTrabajo(this.usuario);
         break;
     }
   }
@@ -115,6 +115,9 @@ export class WindowRootComponent implements OnInit {
           this.router.navigate(['Area-Bodega/perfil']);
           break;
         default:
+          WindowRootComponent.autenticado = true;
+          this.secion.usuario = usuarioSec;
+          this.router.navigate(['Area-Administracion/perfil']);
           break;
       }
     } else {

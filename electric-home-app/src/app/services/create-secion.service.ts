@@ -16,6 +16,7 @@ export class CreateSecionService {
   clientes:Cliente[]=[]
   porductos:Producto[]=[]
   ismodificacion= false
+  tipoReport=0
 
   productoModificacion:Producto= new Producto()
 

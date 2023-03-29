@@ -1,3 +1,5 @@
+import { AreaReportesComponent } from './components-app/Windows-Admin/area-reportes/area-reportes.component';
+import { WindowNewEmpleadoComponent } from './components-app/Windows-Admin/window-new-empleado/window-new-empleado.component';
 import { WindowPedidosBodegaComponent } from './components-app/Windows-Bodega/window-pedidos-bodega/window-pedidos-bodega.component';
 import { WindowProductosBodegaComponent } from './components-app/Windows-Bodega/window-productos-bodega/window-productos-bodega.component';
 import { WindowPerfilComponent } from './components-app/Windows-Bodega/window-perfil/window-perfil.component';
@@ -11,6 +13,7 @@ import { WindowRootComponent } from './components-app/window-root/window-root.co
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AutenticacionService } from './services/autenticacion.service';
+import { WindowPerfilAdminComponent } from './components-app/Windows-Admin/window-perfil-admin/window-perfil-admin.component';
 
 const routes: Routes = [
   {
@@ -75,6 +78,21 @@ const routes: Routes = [
   {
     path:'Area-Bodega/solicitudes',
     component: WindowPedidosBodegaComponent,
+    canActivate: [AutenticacionService],
+  },
+  {
+    path:'Area-Administracion/perfil',
+    component: WindowPerfilAdminComponent,
+    canActivate: [AutenticacionService],
+  },
+  {
+    path:'Area-Administracion/new-empleado',
+    component: WindowNewEmpleadoComponent,
+    canActivate: [AutenticacionService],
+  },
+  {
+    path:'Area-Administracion/reportes',
+    component: AreaReportesComponent,
     canActivate: [AutenticacionService],
   },
   {
