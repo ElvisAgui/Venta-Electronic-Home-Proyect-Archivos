@@ -37,6 +37,12 @@ public class Controlador {
     @Autowired
     BodegaRepository bodegaRpo;
 
+    /**
+     * funcion para el login
+     * @param cui
+     * @param password
+     * @return  obtiene al empleado con su contraseña 
+     */
     @GetMapping(path = "/empleados")
     public List<Empleado> list(@RequestParam String cui, @RequestParam String password) {
         List<Empleado> empleados = new ArrayList<>();
@@ -48,6 +54,12 @@ public class Controlador {
         return empleados;
     }
 
+    /**
+     * 
+     * @param cui
+     * @param password
+     * @return la sesion del empleado en el login
+     */
     @GetMapping(path = "/empleadoSecion")
     public Empleado empleadoSecion(@RequestParam String cui, @RequestParam String password) {
         try {
@@ -73,6 +85,11 @@ public class Controlador {
 
     }
 
+    /**
+     * 
+     * @param sucursal
+     * @return 
+     */
     @GetMapping(path = "/empleadoSucursal")
     public Sucursal empleadDeLaSucursal(@RequestParam int sucursal) {
         try {
@@ -83,6 +100,11 @@ public class Controlador {
         }
     }
 
+    /**
+     * 
+     * @param bodega
+     * @return 
+     */
     @GetMapping(path = "/empleadoBodega")
     public Bodega empleadoBodega(@RequestParam int bodega) {
         try {

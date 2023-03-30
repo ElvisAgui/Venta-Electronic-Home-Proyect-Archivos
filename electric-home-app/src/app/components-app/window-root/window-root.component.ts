@@ -33,6 +33,9 @@ export class WindowRootComponent implements OnInit {
     });
   }
 
+  /**
+   * funcion para logearse
+   */
   public login() {
     this.serviceLogin.getEmpleados(this.loginForm.value).subscribe(
       (created: Usuario) => {
@@ -58,6 +61,9 @@ export class WindowRootComponent implements OnInit {
     );
   }
 
+  /**
+   * dirife al area de trabajo segun su cargo
+   */
   private getAreaTrabajo() {
     switch (this.usuario.tipoCargo) {
       case 1:
@@ -75,6 +81,9 @@ export class WindowRootComponent implements OnInit {
     }
   }
 
+  /**
+   * obtiene los datos de la bodega
+   */
   private getBodega() {
     this.serviceLogin
       .getBodegaContratado(this.usuario)
@@ -84,6 +93,9 @@ export class WindowRootComponent implements OnInit {
       });
   }
 
+  /**
+   * dirige a la sucursla con sus respectivos datos
+   */
   public getSucursal() {
     this.serviceLogin.getSucursalContradado(this.usuario).subscribe(
       (sucu: Sucursal) => {

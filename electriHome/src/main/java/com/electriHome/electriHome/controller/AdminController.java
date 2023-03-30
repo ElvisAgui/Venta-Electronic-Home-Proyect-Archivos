@@ -71,6 +71,10 @@ public class AdminController {
     @Autowired
     SucursalReportRepository supeReportRepository;
     
+    /**
+     * peticion get para cargos existentes para los empleados
+     * @return 
+     */
     @GetMapping(path = "/getCargos")
     public List<Cargo> getListProductosSucursal() {
         try {
@@ -81,6 +85,10 @@ public class AdminController {
         }
     }
     
+    /**
+     * obtiene los clientes para el reporte de clientes mas ganancias
+     * @return 
+     */
     @GetMapping(path = "/getClientesReport")
     public List<ClienteReport> getRportClientes() {
         try {
@@ -105,7 +113,11 @@ public class AdminController {
         }
     }
 
-    
+
+    /**
+     * 
+     * @return top empleados con mas ventas
+     */
     @GetMapping(path = "/getEmpleadoReportMasVenta")
     public List<EmpleadoReport> getEmpleadoMasVentas(){
          try {
@@ -129,6 +141,10 @@ public class AdminController {
         }
     }
     
+    /**
+     * 
+     * @return top empleados mas ingresos
+     */
     @GetMapping(path = "/getEmpleadoReportMasIngresos")
     public List<EmpleadoReport> getEmpleadoReportMasIngresos(){
          try {
@@ -152,6 +168,10 @@ public class AdminController {
         }
     }
     
+    /**
+     * 
+     * @return productos mas vendidos
+     */
     @GetMapping(path = "/getProductoMasVendido")
     public List<ProductoReport> getProductoMasVendido(){
          try {
@@ -176,6 +196,10 @@ public class AdminController {
         }
     }
     
+    /**
+     * 
+     * @return productos con mas ingresos 
+     */
     @GetMapping(path = "/getProductoMasIngreso")
     public List<ProductoReport> getProductoMasIngresos(){
          try {
@@ -201,6 +225,11 @@ public class AdminController {
     }
     
     
+    /**
+     * 
+     * @param sucursal
+     * @return producto mas vendido por cada sucursal
+     */
     @GetMapping(path = "/getProductoMasVendidoSucural")
     public List<ProductoReport> getProductoMasVendidoSucursal(@RequestParam Integer sucursal){
          try {
@@ -226,7 +255,12 @@ public class AdminController {
     }
     
     
-     @GetMapping(path = "/getProductoMasIngresoSucursal")
+    /**
+     * 
+     * @param sucursal codigo de sucursal para el reporte
+     * @return productos con mas ingresos de cada sucural
+     */
+    @GetMapping(path = "/getProductoMasIngresoSucursal")
     public List<ProductoReport> getProductoMasIngresosSucursal(@RequestParam Integer sucursal){
          try {
            List<Object[]> result = this.productoReportRepository.getProductoMasIngresoSucursal(sucursal);
@@ -251,6 +285,10 @@ public class AdminController {
     }
     
     
+    /**
+     * 
+     * @return top de las sucursales con mas ventas
+     */
     @GetMapping(path = "/getSucursalMasVentas")
     public List<SucursalReport> getSucursalMasVenta(){
          try {
@@ -271,6 +309,12 @@ public class AdminController {
             return null;
         }
     }
+    
+    
+    /**
+     * 
+     * @return sucursales con mas ingresos
+     */
     @GetMapping(path = "/getSucursalMasIngresos")
     public List<SucursalReport> getSucursalMasIngresos(){
          try {
@@ -292,7 +336,11 @@ public class AdminController {
         }
     }
     
-    
+    /**
+     * 
+     * @param empleado guarda al nuevo empleado
+     * @return 
+     */
     @PostMapping(path = "/saveEmpleado")
     public Empleado saveEmpleado(@RequestBody Empleado empleado) {
         try {
@@ -315,7 +363,12 @@ public class AdminController {
             return null;
         }
     }
-
+    
+    /**
+     * guarda al empleado en la tabla empleado
+     * @param empleado
+     * @return 
+     */
     private boolean saveTableEmpleado(Empleado empleado) {
         EmpleadoEnty emp = new EmpleadoEnty();
         emp.setApellido(empleado.getApellido());
@@ -326,6 +379,11 @@ public class AdminController {
         return null != this.empleadoEntyRepository.save(emp);
     }
 
+    /**
+     * guarda el cargo asignado al empelado 
+     * @param empleado
+     * @return 
+     */
     private boolean saveCargoEmpleado(Empleado empleado) {
         CargoEmpleado cargoEmp = new CargoEmpleado();
         cargoEmp.setCodigoCargo(empleado.getTipoCargo() + 0);
@@ -333,6 +391,11 @@ public class AdminController {
         return null != this.cargoEmpleadoRepository.save(cargoEmp);
     }
 
+    /**
+     * guarda al empleado en la sucursal donde trabajara
+     * @param empleado
+     * @return 
+     */
     private boolean guardarSucursal(Empleado empleado) {
         SucursalEmpleado sucurEmp = new SucursalEmpleado();
         sucurEmp.setCodigoSucursal(empleado.getCodigoSucursal());
@@ -340,6 +403,11 @@ public class AdminController {
         return null != this.sucursalEmpleadoRepository.save(sucurEmp);
     }
 
+    /**
+     * si el empleado es de bodega lo guarda en bodega
+     * @param empleado
+     * @return 
+     */
     private boolean guardarBodega(Empleado empleado) {
         BodegaEmpleado bodegEmpl = new BodegaEmpleado();
         bodegEmpl.setCodigoBodega(1);

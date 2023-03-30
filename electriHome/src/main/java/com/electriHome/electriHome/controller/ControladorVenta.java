@@ -50,6 +50,11 @@ public class ControladorVenta {
     @Autowired
     VentaProductoRepository ventaRepo;
 
+    /**
+     * 
+     * @param nit
+     * @return obtiene el cliente sgegun el nit 
+     */
     @GetMapping(path = "/getCliente")
     public Cliente clienteVenta(@RequestParam String nit) {
         List<Object[]> result = this.clienteRpo.getCliente((String) nit);
@@ -64,6 +69,10 @@ public class ControladorVenta {
         }
     }
 
+    /**
+     * 
+     * @return list de clientes registrados
+     */
     @GetMapping(path = "/getClientes")
     public List<Cliente> getClientes() {
         try {
@@ -74,6 +83,11 @@ public class ControladorVenta {
         }
     }
 
+    /**
+     * 
+     * @param cliente
+     * @return guarda al nuevo cliente
+     */
     @PostMapping(path = "/saveCliente")
     public Cliente saveClinte(@RequestBody Cliente cliente) {
         try {
@@ -84,6 +98,11 @@ public class ControladorVenta {
         }
     }
 
+    /**
+     * 
+     * @param cliente
+     * @return actualiza al cliente
+     */
     @PutMapping(path = "/setCliente")
     public Cliente setCliente(@RequestBody Cliente cliente) {
         try {
@@ -95,6 +114,13 @@ public class ControladorVenta {
 
     }
 
+    /**
+     * gurada la venta
+     * @param venta
+     * @param gana
+     * @param cui
+     * @return  venta nueva
+     */
     @PostMapping(path = "/saveVenta")
     public VentaProducto saveVenta(@RequestBody VentaProducto venta, @RequestParam BigDecimal gana, @RequestParam String cui) {
         venta.setGanaciaReal(gana);
@@ -109,6 +135,12 @@ public class ControladorVenta {
 
     }
 
+    /**
+     * guarda los items de la venta realizada
+     * @param itemsVenta
+     * @param codigoSucural
+     * @return 
+     */
     @PostMapping(path = "/saveItemVenta")
     public boolean saveItemVenta(@RequestBody List<ItemsVenta> itemsVenta, @RequestParam Integer codigoSucural) {
         try {
@@ -122,6 +154,11 @@ public class ControladorVenta {
 
     }
 
+    /**
+     * descuenta el producto de la sucursal
+     * @param itemsVenta
+     * @param codigoSucural 
+     */
     private void procesoUpdateProductoSucur(List<ItemsVenta> itemsVenta, Integer codigoSucural) {
         for (ItemsVenta item : itemsVenta) {
             ItemsVenta itemVenta = this.itemVentaRpo.save(item);
@@ -139,10 +176,22 @@ public class ControladorVenta {
         }
     }
 
+    /**
+     * descuenta la cantidad comprada
+     * @param cantActu
+     * @param cantCompra
+     * @return 
+     */
     private Integer calculoCantidadExisitent(Integer cantActu, Integer cantCompra) {
         return cantActu - cantCompra;
     }
 
+    /**
+     * 
+     * @param sucursal
+     * @param producto
+     * @return 
+     */
     @GetMapping(path = "/getProducto")
     public Producto getProducto(@RequestParam Integer sucursal, @RequestParam String producto) {
         try {

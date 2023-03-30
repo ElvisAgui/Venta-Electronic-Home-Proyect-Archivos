@@ -52,7 +52,12 @@ public class InventarioController {
 
     @Autowired
     PedidoRepository pedidoRpo;
-
+    
+    /**
+     * guarda el pedido echo hacia otras sucursales
+     * @param pedido
+     * @return 
+     */
     @PostMapping(path = "/savePedido")
     public boolean savePedido(@RequestBody Pedido pedido) {
         try {
@@ -69,6 +74,12 @@ public class InventarioController {
         }
     }
 
+    /**
+     * 
+     * @param solPedido
+     * @param SucurDescuento
+     * @return 
+     */
     @PutMapping(path = "/solucionPedido")
     public boolean solucionPido(@RequestBody SolucionPedido solPedido, @RequestParam Integer SucurDescuento) {
         try {
@@ -82,6 +93,10 @@ public class InventarioController {
         }
     }
 
+    /**
+     * 
+     * @param solPedido 
+     */
     private void updateEstadoPedido(SolucionPedido solPedido) {
         Pedido pedido = new Pedido();
         pedido.setCodigoId(solPedido.getCodigoId());
@@ -96,6 +111,11 @@ public class InventarioController {
 
     }
 
+    /**
+     * 
+     * @param solPedido
+     * @return 
+     */
     @PutMapping(path = "/rechazarPedido")
     public boolean updateEstadoPedidoRechazado(@RequestBody SolucionPedido solPedido) {
         try {

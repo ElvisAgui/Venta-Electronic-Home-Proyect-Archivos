@@ -67,6 +67,11 @@ public class BodegaController {
     @Autowired
     PedidoRepository pedidoRpo;
 
+    /**
+     * 
+     * @param sucursal sucursal de busqueda
+     * @return productos almacenados en la sucursal
+     */
     @GetMapping(path = "/getProductos")
     public List<Producto> getListProductosSucursal(@RequestParam Integer sucursal) {
         try {
@@ -93,6 +98,10 @@ public class BodegaController {
 
     }
 
+    /**
+     * 
+     * @return list marcas exisitentes
+     */
     @GetMapping(path = "/getMarcas")
     public List<Marca> getMarcas() {
         try {
@@ -103,6 +112,12 @@ public class BodegaController {
         }
     }
 
+    /**
+     * 
+     * @param producto
+     * @param descripcion
+     * @return guarda el producto nuevo a registrar
+     */
     @PostMapping(path = "/saveProducto")
     public Producto saveProdcuto(@RequestBody Producto producto, @RequestParam String descripcion) {
         try {
@@ -122,6 +137,11 @@ public class BodegaController {
         }
     }
 
+    /**
+     * 
+     * @param marca
+     * @return gurada el nuevo producto con su respectiva marca
+     */
     @PostMapping(path = "/saveMarca")
     public Marca saveMarca(@RequestBody Marca marca) {
         try {
@@ -135,6 +155,12 @@ public class BodegaController {
         }
     }
 
+    /**
+     * 
+     * @param producto
+     * @param codigoMarca
+     * @return 
+     */
     @PostMapping(path = "/saveProductoBodega")
     public boolean saveProductoBodega(@RequestBody Producto producto, @RequestParam Integer codigoMarca) {
         try {
@@ -196,6 +222,11 @@ public class BodegaController {
         }
     }
 
+    /**
+     * 
+     * @param producto
+     * @return 
+     */
     @PutMapping(path = "/setBodegaProducto")
     public boolean setBodegaProducto(@RequestBody Producto producto) {
         try {
